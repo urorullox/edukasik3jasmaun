@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Putus Rantainya: Edukasi K3 tentang Kecelakaan Kerja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=Source+Serif+4:opsz,wght@8..60,400..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#EEF1F0; --surface:#FFFFFF; --ink:#14222A; --muted:#475963; --line:#C4CED3;
+  --yellow:#FFC20E; --stat:#FFC20E; --green:#0B7A43; --red:#C62E2A; --focus:#1456A6; --on-ink:#EEF1F0;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#101A20; --surface:#172730; --ink:#E9EEF0; --muted:#A5B5BD; --line:#2F434E;
+    --green:#41B97D; --red:#FF6B66; --stat:#8A1C18; --focus:#7FB3F5; --on-ink:#101A20;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#101A20; --surface:#172730; --ink:#E9EEF0; --muted:#A5B5BD; --line:#2F434E;
+  --green:#41B97D; --red:#FF6B66; --stat:#8A1C18; --focus:#7FB3F5; --on-ink:#101A20;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px);}
+@media (prefers-reduced-motion: no-preference){ html{scroll-behavior:smooth;} }
+*,*::before,*::after{box-sizing:border-box;}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Source Serif 4",Georgia,"Times New Roman",serif;
+  font-size:1.125rem; line-height:1.65;
+}
+h1,h2,h3,h4,button,nav,.sans{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;}
+h1,h2,h3{margin:0; line-height:1.05; letter-spacing:-0.015em;}
+p{margin:0 0 1em; max-width:62ch;}
+a{color:inherit;}
+:focus-visible{outline:3px solid var(--focus); outline-offset:3px;}
+.wrap{max-width:1080px; margin:0 auto; padding:0 20px;}
+
+/* nav */
+.topnav{position:sticky; top:env(safe-area-inset-top,0px); z-index:20; background:var(--paper); border-bottom:2px solid var(--ink);}
+.topnav .inner{display:flex; align-items:center; gap:2px; overflow-x:auto; scrollbar-width:none;}
+.topnav .inner::-webkit-scrollbar{display:none;}
+.topnav a{padding:14px 12px; font-weight:600; font-size:.95rem; text-decoration:none; white-space:nowrap;}
+.topnav a:hover{text-decoration:underline; text-underline-offset:5px; text-decoration-thickness:2px;}
+.topnav .brand{font-weight:850; font-stretch:80%; font-size:1.05rem; padding-left:0; margin-right:8px;}
+
+/* hero */
+.hero{padding:56px 0 0;}
+.hero h1{
+  font-weight:850; font-stretch:78%; font-size:clamp(2.8rem,9.4vw,6.6rem);
+  line-height:.96; letter-spacing:-0.02em; max-width:15em;
+}
+.hero .lead{font-size:1.25rem; margin-top:24px; max-width:50ch;}
+.byline{font-family:"Archivo","Helvetica Neue",Arial,sans-serif; font-size:.95rem; color:var(--muted); margin-top:4px;}
+.stripe{height:18px; margin-top:40px; background:repeating-linear-gradient(-45deg,var(--yellow) 0 16px,var(--ink) 16px 32px);}
+
+/* dominoes */
+.drow{
+  --dw:clamp(34px,9vw,84px); --dh:clamp(88px,21vw,180px);
+  display:flex; align-items:flex-end; gap:clamp(7px,2.6vw,28px);
+  padding:34px calc(var(--dh)*.95) 0 4px; margin-top:8px; width:fit-content; max-width:100%;
+}
+.domino{
+  position:relative; flex:none; width:var(--dw); height:var(--dh);
+  background:var(--surface); color:var(--ink); border:3px solid var(--ink); border-radius:6px;
+  transform-origin:100% 100%; display:grid; place-items:start center; padding-top:8px;
+  font-family:"Archivo",Arial,sans-serif; font-weight:850; font-size:clamp(1rem,3vw,1.7rem);
+  transition:transform .5s cubic-bezier(.55,0,.85,.5), background .3s, opacity .3s;
+}
+.domino::after{content:""; position:absolute; left:8%; right:8%; top:50%; border-top:3px solid var(--ink);}
+.domino.last{background:#C62E2A; color:#fff; border-color:var(--ink);}
+.domino.last::after{border-color:#fff;}
+.domino.fall{transform:rotate(66deg);}
+button.domino{cursor:pointer; padding-bottom:0;}
+button.domino.removed{transform:translateY(-26px) rotate(-5deg); opacity:.4; border-style:dashed; background:transparent; color:var(--ink);}
+button.domino.removed.fall{transform:translateY(-26px) rotate(-5deg);}
+.legend{margin:22px 0 0; padding-left:1.4em; max-width:62ch; font-size:1rem;}
+.legend li{margin-bottom:2px;}
+.legend li.removed{text-decoration:line-through; color:var(--muted);}
+.legend li.removed::after{content:" (dicabut)"; text-decoration:none; display:inline-block;}
+
+/* data band */
+.databand{background:var(--ink); color:var(--on-ink); padding:44px 0;}
+.databand p{max-width:44ch; font-size:clamp(1.3rem,3.2vw,1.9rem); line-height:1.35; margin:0 0 .6em;}
+.databand b{font-family:"Archivo",Arial,sans-serif; font-weight:850; font-stretch:80%; font-size:1.35em; color:var(--stat);}
+.databand small{font-family:"Archivo",Arial,sans-serif; font-size:.85rem; opacity:.8;}
+
+/* sections */
+.band{padding:76px 0;}
+.band + .band{border-top:2px solid var(--ink);}
+.band h2{font-weight:850; font-stretch:82%; font-size:clamp(2rem,5vw,3.4rem); margin-bottom:18px; max-width:18em;}
+.intro{font-size:1.2rem; max-width:56ch;}
+
+.triad{display:grid; grid-template-columns:repeat(3,1fr); margin-top:34px; border-top:3px solid var(--ink);}
+.triad > div{padding:20px 22px 8px 0;}
+.triad > div + div{padding-left:22px; border-left:1px solid var(--line);}
+.triad h3{font-size:1.5rem; font-weight:800; margin-bottom:4px;}
+.triad .when{font-family:"Archivo",Arial,sans-serif; font-size:.9rem; color:var(--muted); margin-bottom:10px;}
+.formula{margin-top:26px; padding:14px 18px; border-left:6px solid var(--yellow); background:var(--surface); max-width:62ch;}
+@media (max-width:760px){
+  .triad{grid-template-columns:1fr;}
+  .triad > div + div{padding-left:0; border-left:0; border-top:1px solid var(--line);}
+}
+
+/* tabs */
+.tabs{display:flex; flex-wrap:wrap; gap:8px; margin:30px 0 26px;}
+.tab{
+  appearance:none; background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:4px;
+  padding:10px 14px; font-weight:700; font-size:.98rem; cursor:pointer; line-height:1.2;
+}
+.tab[aria-selected="true"]{background:var(--ink); color:var(--on-ink);}
+.panel h3{font-size:clamp(1.5rem,3.4vw,2.1rem); font-weight:800; margin-bottom:10px;}
+.panel .who{font-family:"Archivo",Arial,sans-serif; color:var(--muted); font-size:.95rem; margin-bottom:14px;}
+.demo{margin-top:30px; padding:22px 22px 26px; background:var(--surface); border:2px solid var(--ink); border-radius:6px;}
+.demo h4{margin:0 0 6px; font-size:1.1rem; font-weight:800;}
+.demo .how{font-size:1rem; color:var(--muted); margin-bottom:6px;}
+.actions{display:flex; flex-wrap:wrap; gap:10px; margin-top:18px;}
+.btn{
+  appearance:none; cursor:pointer; border:2px solid var(--ink); border-radius:4px; background:var(--ink); color:var(--on-ink);
+  font-weight:700; font-size:1rem; padding:11px 18px; line-height:1.2;
+}
+.btn.alt{background:transparent; color:var(--ink);}
+.btn[disabled]{opacity:.45; cursor:not-allowed;}
+.result{min-height:3.4em; margin-top:16px; padding:12px 16px; border-left:6px solid var(--ink); background:var(--paper); font-size:1.02rem; max-width:62ch;}
+.pyr{display:flex; gap:6px; margin:20px 0 4px; align-items:flex-end; font-family:"Archivo",Arial,sans-serif;}
+.pyr div{background:var(--yellow); color:#14222A; border:2px solid var(--ink); text-align:center; padding:8px 4px; font-size:.82rem; line-height:1.25; flex:1;}
+.pyr .p1{flex:0 0 12%;} .pyr .p29{flex:0 0 30%;} .pyr .p300{flex:1;}
+
+/* swiss cheese */
+.cheese{position:relative; display:flex; align-items:flex-start; gap:clamp(6px,3.4vw,40px); padding:20px 30px 6px; margin-top:12px; overflow-x:auto;}
+.layer{width:clamp(58px,16vw,120px); display:flex; flex-direction:column; align-items:center; gap:8px; text-align:center;}
+.slice{position:relative; width:100%; height:190px; background:var(--yellow); border:3px solid var(--ink); border-radius:8px;}
+.slice::before,.slice::after{content:""; position:absolute; border-radius:50%; background:var(--paper); border:2px solid var(--ink);}
+.slice::before{width:16%; aspect-ratio:1; top:10%; left:20%;}
+.slice::after{width:12%; aspect-ratio:1; bottom:9%; right:22%;}
+.hole{position:absolute; left:50%; top:50%; width:46%; aspect-ratio:1; transform:translate(-50%,-50%); border-radius:50%; background:var(--paper); border:3px solid var(--ink);}
+.layer.plugged .hole{background:repeating-linear-gradient(45deg,var(--ink) 0 3px,var(--yellow) 3px 8px);}
+.layer .name{font-family:"Archivo",Arial,sans-serif; font-weight:800; font-size:.78rem; line-height:1.15;}
+.layer .btn{font-size:.74rem; padding:7px 4px; width:100%;}
+.layer .btn[aria-pressed="true"]{background:var(--green); border-color:var(--green); color:var(--on-ink);}
+.hazard{
+  position:absolute; top:calc(20px + 95px - 15px); left:0; width:30px; height:30px; border-radius:50%;
+  background:#C62E2A; border:3px solid var(--ink); color:#fff; display:grid; place-items:center; z-index:3;
+  font-family:"Archivo",Arial,sans-serif; font-weight:900; font-size:.95rem; transition:left .55s ease-in-out;
+}
+.hazard.stop{animation:thud .35s;}
+@keyframes thud{0%,100%{transform:translateX(0)}30%{transform:translateX(-6px)}60%{transform:translateX(3px)}}
+.mini{margin:14px 0 0; padding-left:1.2em; font-size:.98rem; max-width:62ch;}
+
+/* bird rail */
+.rail{list-style:none; margin:24px 0 0; padding:0; counter-reset:r; max-width:720px;}
+.rail li{position:relative; padding:0 0 22px 56px; counter-increment:r;}
+.rail li::before{
+  content:counter(r); position:absolute; left:0; top:0; width:38px; height:38px; display:grid; place-items:center;
+  background:var(--ink); color:var(--on-ink); border-radius:50%; font-family:"Archivo",Arial,sans-serif; font-weight:800;
+}
+.rail li::after{content:""; position:absolute; left:18px; top:42px; bottom:4px; border-left:3px solid var(--ink);}
+.rail li:last-child::after{display:none;}
+.rail h4{margin:0; font-size:1.15rem; font-weight:800;}
+.rail p{margin:2px 0 0; font-size:1.02rem;}
+.rail .ex{color:var(--muted);}
+
+/* details */
+details{border-top:1px solid var(--line);}
+details:last-of-type{border-bottom:1px solid var(--line);}
+summary{cursor:pointer; padding:14px 6px; font-family:"Archivo",Arial,sans-serif; font-weight:700; font-size:1.08rem; list-style:none; display:flex; gap:12px; align-items:baseline;}
+summary::-webkit-details-marker{display:none;}
+summary::before{content:"+"; font-weight:900; width:1ch; flex:none;}
+details[open] > summary::before{content:"\2212";}
+details .body{padding:0 6px 16px 2.2ch; font-size:1.04rem;}
+details .body p{margin:0;}
+
+.two{display:grid; grid-template-columns:1fr 1fr; gap:38px; align-items:start;}
+@media (max-width:860px){ .two{grid-template-columns:1fr;} }
+.steps5{display:grid; grid-template-columns:repeat(5,1fr); gap:0; list-style:none; padding:0; margin:20px 0 0; counter-reset:s; border-top:3px solid var(--ink);}
+.steps5 li{counter-increment:s; padding:12px 10px 8px 0; font-family:"Archivo",Arial,sans-serif; font-size:.95rem; line-height:1.3; font-weight:600;}
+.steps5 li::before{content:counter(s); display:block; font-weight:900; font-size:1.6rem; margin-bottom:2px;}
+@media (max-width:760px){ .steps5{grid-template-columns:1fr 1fr;} }
+
+/* hierarchy game */
+.hoc{margin-top:30px;}
+.hoc-card{padding:20px 22px; background:var(--surface); border:2px solid var(--ink); border-radius:6px; max-width:760px;}
+.hoc-card .prog{font-family:"Archivo",Arial,sans-serif; font-size:.9rem; color:var(--muted); margin:0 0 4px;}
+.hoc-card .hz{font-family:"Archivo",Arial,sans-serif; font-weight:800; font-size:1.05rem; margin:0;}
+.hoc-card .ms{font-size:1.3rem; line-height:1.4; margin:6px 0 0;}
+.cap{font-family:"Archivo",Arial,sans-serif; font-size:.85rem; color:var(--muted); margin:22px 0 6px; max-width:760px; display:flex; justify-content:space-between; gap:12px;}
+.pyramid{display:flex; flex-direction:column; gap:6px; max-width:760px;}
+.lv{
+  appearance:none; cursor:pointer; text-align:center; border:3px solid var(--ink); border-radius:4px; padding:10px 12px;
+  font-family:"Archivo",Arial,sans-serif; line-height:1.25; color:#14222A; align-self:center; position:relative;
+}
+.lv b{display:block; font-size:1.05rem; font-weight:850;}
+.lv span{font-size:.85rem;}
+.lv:nth-child(1){width:100%; background:#0B7A43; color:#fff;}
+.lv:nth-child(2){width:88%; background:#8CC63F;}
+.lv:nth-child(3){width:76%; background:#FFC20E;}
+.lv:nth-child(4){width:64%; background:#F28C28;}
+.lv:nth-child(5){width:52%; background:#C62E2A; color:#fff;}
+.lv[aria-disabled="true"]{cursor:default;}
+.lv.right{outline:5px solid var(--ink); outline-offset:2px;}
+.lv.right::after{content:"Jawaban benar"; position:absolute; right:8px; top:6px; font-size:.7rem; background:var(--ink); color:var(--on-ink); padding:1px 6px; border-radius:3px;}
+.lv.wrong{border-style:dashed; outline:3px dashed var(--ink); outline-offset:2px; opacity:.85;}
+.lv.wrong::after{content:"Pilihanmu"; position:absolute; right:8px; top:6px; font-size:.7rem; background:var(--ink); color:var(--on-ink); padding:1px 6px; border-radius:3px;}
+@media (max-width:560px){ .lv{width:100% !important;} .lv.right::after,.lv.wrong::after{position:static; display:inline-block; margin-top:4px;} }
+
+/* steps (mitigasi) */
+.seq{list-style:none; margin:26px 0 0; padding:0; counter-reset:q; max-width:760px;}
+.seq > li{counter-increment:q;}
+.seq details{border-top:1px solid var(--line); border-bottom:0;}
+.seq summary::before{content:counter(q); width:auto; min-width:1.6ch; background:var(--ink); color:var(--on-ink); border-radius:50%; display:inline-grid; place-items:center; width:30px; height:30px; flex:none; font-size:.95rem;}
+.seq details[open] > summary::before{content:counter(q);}
+.seq details .body{padding-left:42px;}
+dl.eq{margin:0; display:grid; grid-template-columns:1fr; gap:0;}
+dl.eq dt{font-family:"Archivo",Arial,sans-serif; font-weight:800; margin-top:14px;}
+dl.eq dd{margin:0; font-size:1.02rem; max-width:50ch;}
+
+/* quiz */
+.quiz{margin-top:28px; max-width:760px;}
+.qcard{background:var(--surface); border:2px solid var(--ink); border-radius:6px; padding:22px;}
+.qcard .prog{font-family:"Archivo",Arial,sans-serif; font-size:.9rem; color:var(--muted); margin:0 0 6px;}
+.qcard .qt{font-size:1.3rem; line-height:1.4; margin:0 0 16px;}
+.opt{
+  display:block; width:100%; text-align:left; appearance:none; cursor:pointer; margin-bottom:8px; padding:12px 14px;
+  background:transparent; color:var(--ink); border:2px solid var(--ink); border-radius:4px;
+  font-family:"Source Serif 4",Georgia,serif; font-size:1.05rem; line-height:1.4;
+}
+.opt[aria-disabled="true"]{cursor:default;}
+.opt.right{background:var(--green); color:var(--on-ink); border-color:var(--green);}
+.opt.wrong{border-style:dashed; text-decoration:line-through;}
+.qfb{margin-top:14px; padding:12px 16px; border-left:6px solid var(--ink); background:var(--paper); font-size:1.02rem;}
+.score{font-family:"Archivo",Arial,sans-serif; font-weight:850; font-stretch:80%; font-size:clamp(2.4rem,7vw,4rem); line-height:1; margin:6px 0 10px;}
+
+/* footer */
+footer{background:var(--ink); color:var(--on-ink); padding:56px 0 64px;}
+footer h2{font-weight:850; font-stretch:82%; font-size:clamp(1.6rem,4vw,2.4rem); margin-bottom:12px;}
+footer .ident{font-family:"Archivo",Arial,sans-serif; font-size:1.05rem; line-height:1.6; margin-bottom:34px;}
+footer ol{padding-left:1.4em; font-size:.98rem; line-height:1.55; max-width:80ch;}
+footer li{margin-bottom:6px;}
+footer a{color:var(--stat);}
+footer h3{font-size:1.15rem; margin:26px 0 10px;}
+
+@media (max-width:480px){
+  .demo{padding:16px 12px 20px;}
+  .cheese{padding:20px 12px 8px 28px; gap:6px;}
+  .layer{width:clamp(46px,15vw,70px);}
+  .layer .btn{font-size:.66rem; padding:7px 2px;}
+  .hazard{width:22px; height:22px; top:calc(20px + 95px - 11px); font-size:.8rem;}
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important; animation:none !important;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav" aria-label="Navigasi bagian">
+  <div class="wrap inner">
+    <a class="brand" href="#atas">Putus Rantainya</a>
+    <a href="#dasar">Dasar</a>
+    <a href="#teori">Teori</a>
+    <a href="#pencegahan">Pencegahan</a>
+    <a href="#pengendalian">Pengendalian</a>
+    <a href="#mitigasi">Mitigasi</a>
+    <a href="#kuis">Kuis</a>
+    <a href="#referensi">Referensi</a>
+  </div>
+</nav>
+
+<header class="hero" id="atas">
+  <div class="wrap">
+    <h1>Kecelakaan kerja bukan nasib. Ia rantai yang bisa diputus.</h1>
+    <p class="lead">Media edukasi K3 tentang teori kecelakaan kerja, pencegahan, pengendalian risiko, dan mitigasi. Ada simulasi yang bisa kamu coba langsung.</p>
+    <p class="byline">Oleh Jasmaun Rezky Sulfithdin, NIM V116251081, kelas <span data-kelas></span></p>
+
+    <div class="drow" id="heroRow" aria-hidden="true"></div>
+    <div class="stripe" aria-hidden="true"></div>
+  </div>
+</header>
+
+<section class="databand" aria-label="Data kecelakaan kerja Indonesia">
+  <div class="wrap">
+    <p>Sepanjang 2025, BPJS Ketenagakerjaan mencatat <b>319.224</b> klaim kecelakaan kerja. <b>9.834</b> kasus berujung kematian dan <b>4.133</b> kasus menyebabkan cacat fungsi atau cacat total.</p>
+    <small>Data disampaikan Menteri Ketenagakerjaan Yassierli, dikutip ANTARA, Mei 2026. Setiap angka itu adalah seseorang yang tidak pulang seperti semula.</small>
+  </div>
+</section>
+
+<main>
+
+<section class="band" id="dasar">
+  <div class="wrap">
+    <h2>Tiga kata yang sering tertukar</h2>
+    <p class="intro">Kecelakaan kerja adalah kejadian yang tidak dikehendaki dan tidak diduga, yang bisa menimbulkan korban manusia dan atau kerugian harta benda. Cara kita menanganinya bergantung pada kapan kita bertindak.</p>
+    <div class="triad">
+      <div>
+        <h3>Pencegahan</h3>
+        <div class="when">Sebelum kejadian</div>
+        <p>Semua upaya agar kecelakaan tidak terjadi sama sekali: mengenali bahaya, inspeksi, pelatihan, dan prosedur.</p>
+      </div>
+      <div>
+        <h3>Pengendalian risiko</h3>
+        <div class="when">Selama bahaya masih ada</div>
+        <p>Menurunkan tingkat risiko dengan urutan yang paling efektif lebih dulu: eliminasi, substitusi, rekayasa teknik, administratif, lalu APD.</p>
+      </div>
+      <div>
+        <h3>Mitigasi</h3>
+        <div class="when">Saat dan setelah kejadian</div>
+        <p>Membatasi dampak ketika bahaya sudah terlanjur lepas: pertolongan pertama, evakuasi, tanggap darurat, dan pemulihan.</p>
+      </div>
+    </div>
+    <p class="formula sans"><strong>Risiko = kemungkinan terjadi × tingkat keparahan.</strong> Pencegahan dan pengendalian menurunkan kemungkinan. Mitigasi dan pengendalian tertentu menurunkan keparahan.</p>
+  </div>
+</section>
+
+<section class="band" id="teori">
+  <div class="wrap">
+    <h2>Mengapa kecelakaan terjadi? Lima teori, lima cara melihatnya</h2>
+    <p class="intro">Setiap teori menunjuk titik yang berbeda untuk memutus rantai. Pilih satu dan coba demonya.</p>
+
+    <div class="tabs" role="tablist" aria-label="Teori kecelakaan kerja">
+      <button class="tab" role="tab" id="t-dom" aria-controls="p-dom" aria-selected="true">Domino Heinrich</button>
+      <button class="tab" role="tab" id="t-bird" aria-controls="p-bird" aria-selected="false" tabindex="-1">Loss Causation Bird</button>
+      <button class="tab" role="tab" id="t-swiss" aria-controls="p-swiss" aria-selected="false" tabindex="-1">Swiss Cheese Reason</button>
+      <button class="tab" role="tab" id="t-multi" aria-controls="p-multi" aria-selected="false" tabindex="-1">Multikausal Petersen</button>
+      <button class="tab" role="tab" id="t-energy" aria-controls="p-energy" aria-selected="false" tabindex="-1">Transfer energi</button>
+    </div>
+
+    <!-- Domino -->
+    <div class="panel" role="tabpanel" id="p-dom" aria-labelledby="t-dom">
+      <h3>Kecelakaan adalah domino yang jatuh berurutan</h3>
+      <div class="who">Herbert W. Heinrich, 1931</div>
+      <p>Heinrich menyebut cedera sebagai hasil lima faktor yang berurutan. Jatuhnya satu domino mendorong domino berikutnya. Pesan utamanya: cabut satu domino, dan rantai berhenti.</p>
+      <p>Dari kelimanya, Heinrich menilai tindakan atau kondisi tidak aman (domino ketiga) yang paling mungkin dikendalikan. Contoh: operator yang belum terlatih (2) memakai gerinda tanpa pelindung (3), percikan mengenai mata (4), dan mata cedera (5).</p>
+
+      <div class="demo">
+        <h4>Coba putuskan rantainya</h4>
+        <p class="how">Klik satu domino untuk mencabutnya, lalu tekan Dorong.</p>
+        <div class="drow" id="demoRow"></div>
+        <ol class="legend" id="demoLegend"></ol>
+        <div class="actions">
+          <button class="btn" id="pushBtn" type="button">Dorong domino pertama</button>
+          <button class="btn alt" id="resetDom" type="button">Atur ulang</button>
+        </div>
+        <div class="result" id="domResult" role="status" aria-live="polite">Pilih domino yang ingin dicabut, lalu tekan Dorong.</div>
+      </div>
+
+      <h4 style="margin:30px 0 4px; font-size:1.1rem; font-weight:800;">Piramida Heinrich: kenapa near miss penting</h4>
+      <p>Dari data awalnya, Heinrich memperkirakan setiap 1 cedera berat diikuti sekitar 29 cedera ringan dan 300 kejadian tanpa cedera. Rasio ini banyak dikritik karena data dasarnya terbatas, jadi pakai sebagai gambaran: kejadian kecil adalah peringatan untuk kejadian besar.</p>
+      <div class="pyr" role="img" aria-label="Piramida Heinrich: 1 cedera berat, 29 cedera ringan, 300 tanpa cedera">
+        <div class="p1">1<br>cedera berat</div>
+        <div class="p29">29<br>cedera ringan</div>
+        <div class="p300">300<br>tanpa cedera (near miss)</div>
+      </div>
+    </div>
+
+    <!-- Bird -->
+    <div class="panel" role="tabpanel" id="p-bird" aria-labelledby="t-bird" hidden>
+      <h3>Akar masalahnya sering ada di manajemen</h3>
+      <div class="who">Frank E. Bird Jr. dan George L. Germain, model Loss Causation (ILCI)</div>
+      <p>Bird mengembangkan domino Heinrich dengan menaruh kegagalan manajemen di awal rantai. Perbaikan di tingkat pekerja saja tidak cukup kalau akarnya tidak disentuh. Berikut tahapannya dengan satu contoh kasus: teknisi tersengat listrik.</p>
+      <ol class="rail">
+        <li>
+          <h4>Kurang kontrol manajemen</h4>
+          <p>Program, standar, dan pengawasan tidak berjalan atau tidak dipatuhi.</p>
+          <p class="ex">Contoh: inspeksi panel listrik dan prosedur kunci energi (lockout) tidak pernah diaudit.</p>
+        </li>
+        <li>
+          <h4>Penyebab dasar</h4>
+          <p>Faktor pribadi (pengetahuan, motivasi, kondisi fisik) dan faktor pekerjaan (peralatan, standar kerja, beban kerja).</p>
+          <p class="ex">Contoh: teknisi belum dilatih dan dikejar target perbaikan.</p>
+        </li>
+        <li>
+          <h4>Penyebab langsung</h4>
+          <p>Tindakan dan kondisi substandar yang terlihat di lapangan.</p>
+          <p class="ex">Contoh: panel dikerjakan tanpa mematikan sumber listrik, kabel terkelupas.</p>
+        </li>
+        <li>
+          <h4>Insiden</h4>
+          <p>Kontak dengan energi atau zat yang melebihi batas tubuh.</p>
+          <p class="ex">Contoh: tangan menyentuh penghantar bertegangan.</p>
+        </li>
+        <li>
+          <h4>Kerugian</h4>
+          <p>Cedera pada manusia, kerusakan properti, dan terganggunya proses.</p>
+          <p class="ex">Contoh: luka bakar listrik dan produksi berhenti dua hari.</p>
+        </li>
+      </ol>
+      <p>Bird juga menghitung rasio dari ratusan ribu laporan: kira-kira 1 cedera berat berbanding 10 cedera ringan, 30 kerusakan properti, dan 600 kejadian nyaris celaka.</p>
+    </div>
+
+    <!-- Swiss cheese -->
+    <div class="panel" role="tabpanel" id="p-swiss" aria-labelledby="t-swiss" hidden>
+      <h3>Kecelakaan terjadi saat lubang-lubang sejajar</h3>
+      <div class="who">James Reason, 1990 (dipopulerkan lewat artikel BMJ, 2000)</div>
+      <p>Sistem yang aman punya banyak lapis pertahanan. Tiap lapis seperti irisan keju yang berlubang: tidak ada yang sempurna. Bahaya baru menembus kalau lubang di semua lapisan kebetulan sejajar.</p>
+      <p>Reason membedakan dua jenis lubang: kegagalan aktif (kesalahan orang di garis depan saat itu) dan kondisi laten (kelemahan tersembunyi seperti desain buruk, target yang menekan, atau perawatan yang ditunda).</p>
+
+      <div class="demo">
+        <h4>Skenario: pekerja akan masuk tangki tertutup yang mungkin berisi gas beracun</h4>
+        <p class="how">Perkuat lapisan dengan menekan tombol di bawah irisan, lalu lepaskan bahaya.</p>
+        <div class="cheese" id="cheese">
+          <div class="hazard" id="hazard" aria-hidden="true">!</div>
+        </div>
+        <ul class="mini">
+          <li><b>Desain:</b> ventilasi permanen dan sensor gas di tangki.</li>
+          <li><b>Prosedur:</b> izin kerja ruang terbatas dan uji udara sebelum masuk.</li>
+          <li><b>Supervisi:</b> petugas jaga di luar tangki yang siap menarik keluar.</li>
+          <li><b>APD:</b> detektor gas pribadi dan alat bantu napas.</li>
+        </ul>
+        <div class="actions">
+          <button class="btn" id="releaseBtn" type="button">Lepaskan bahaya</button>
+          <button class="btn alt" id="resetSwiss" type="button">Atur ulang</button>
+        </div>
+        <div class="result" id="swissResult" role="status" aria-live="polite">Belum ada lapisan yang diperkuat. Coba lepaskan bahaya dulu, lalu bandingkan.</div>
+      </div>
+    </div>
+
+    <!-- Multikausal -->
+    <div class="panel" role="tabpanel" id="p-multi" aria-labelledby="t-multi" hidden>
+      <h3>Jarang ada satu penyebab tunggal</h3>
+      <div class="who">Dan Petersen, 1971</div>
+      <p>Teori multikausal berangkat dari pengamatan bahwa kecelakaan hampir selalu lahir dari beberapa faktor yang bekerja bersama. Mencari satu orang yang salah membuat faktor lain luput. Yang dicari adalah semua faktor yang berkontribusi.</p>
+      <div class="demo">
+        <h4>Kasus: pekerja gudang terpeleset dan jatuh dari tangga</h4>
+        <p class="how">Buka tiap kelompok faktor untuk melihat apa yang ikut berperan.</p>
+        <details>
+          <summary>Manusia</summary>
+          <div class="body"><p>Sedang terburu-buru mengejar jadwal pengiriman dan membawa kotak dengan dua tangan, sehingga tidak berpegangan.</p></div>
+        </details>
+        <details>
+          <summary>Peralatan</summary>
+          <div class="body"><p>Pijakan tangga aus dan tidak ada karet antilicin. Tangga tidak pernah masuk daftar inspeksi.</p></div>
+        </details>
+        <details>
+          <summary>Lingkungan</summary>
+          <div class="body"><p>Lantai di dasar tangga basah karena atap bocor, dan pencahayaan di lorong redup.</p></div>
+        </details>
+        <details>
+          <summary>Manajemen</summary>
+          <div class="body"><p>Laporan atap bocor sudah dua minggu tidak ditindaklanjuti dan target pengiriman naik tanpa tambahan tenaga.</p></div>
+        </details>
+        <div class="result" style="margin-top:18px;">Menghapus satu faktor saja (misalnya menegur pekerjanya) tidak membuat gudang ini aman. Faktor lain tetap menunggu korban berikutnya.</div>
+      </div>
+    </div>
+
+    <!-- Energi -->
+    <div class="panel" role="tabpanel" id="p-energy" aria-labelledby="t-energy" hidden>
+      <h3>Cedera adalah energi yang sampai ke tubuh</h3>
+      <div class="who">James Gibson (1961) dan William Haddon (1973)</div>
+      <p>Teori transfer energi memandang kecelakaan sebagai perpindahan energi (mekanik, listrik, termal, kimia, radiasi) ke tubuh atau aset melebihi batas toleransinya. Maka pencegahan berarti mengatur energi itu sebelum sampai ke orang.</p>
+      <p>Haddon merumuskan sepuluh strategi untuk melakukannya:</p>
+      <ol class="mini" style="columns:2 260px; column-gap:36px; max-width:none;">
+        <li>Cegah energi berbahaya terbentuk.</li>
+        <li>Kurangi jumlah energi yang ada.</li>
+        <li>Cegah energi terlepas.</li>
+        <li>Ubah laju atau sebaran pelepasan energi.</li>
+        <li>Pisahkan energi dari orang dalam ruang atau waktu.</li>
+        <li>Pasang penghalang fisik di antaranya.</li>
+        <li>Ubah sifat dasar benda yang bersentuhan.</li>
+        <li>Perkuat apa yang perlu dilindungi.</li>
+        <li>Segera lawan kerusakan yang sudah mulai terjadi.</li>
+        <li>Stabilkan, perbaiki, dan rehabilitasi.</li>
+      </ol>
+      <p style="margin-top:14px;">Sepuluh strategi ini sejalan dengan hierarki pengendalian di bagian berikutnya. Strategi 1 sampai 6 bekerja sebelum energi mengenai orang, strategi 9 dan 10 termasuk mitigasi.</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="pencegahan">
+  <div class="wrap">
+    <h2>Pencegahan: tutup pintunya sebelum bahaya masuk</h2>
+    <p class="intro">Delapan kebiasaan yang paling sering membedakan tempat kerja yang aman dari yang hanya beruntung.</p>
+    <div class="two">
+      <div>
+        <details open>
+          <summary>Kenali bahaya dan nilai risikonya</summary>
+          <div class="body"><p>Semua keputusan pencegahan bermula dari pertanyaan: apa yang bisa salah, seberapa mungkin, dan seberapa parah. Metodenya antara lain HIRADC dan JSA. Hasilnya menentukan mana yang ditangani lebih dulu.</p></div>
+        </details>
+        <details>
+          <summary>Inspeksi rutin dan housekeeping</summary>
+          <div class="body"><p>Inspeksi berkala menemukan kondisi tidak aman, seperti lantai licin, kabel terkelupas, atau guard yang lepas, sebelum ada korban. Housekeeping model 5R (Ringkas, Rapi, Resik, Rawat, Rajin) menjaga tempat kerja tetap tertib.</p></div>
+        </details>
+        <details>
+          <summary>Induksi, pelatihan, dan kompetensi</summary>
+          <div class="body"><p>Pekerja baru, pekerja pindahan, dan siapa pun yang memakai alat baru perlu induksi. Pelatihan menutup celah pengetahuan yang membuat tindakan tidak aman terasa wajar.</p></div>
+        </details>
+        <details>
+          <summary>Safety talk sebelum kerja</summary>
+          <div class="body"><p>Pembicaraan singkat sebelum mulai (sering disebut toolbox meeting): bahaya hari ini, pembagian tugas, dan siapa yang berhak menghentikan pekerjaan.</p></div>
+        </details>
+      </div>
+      <div>
+        <details>
+          <summary>Perawatan preventif</summary>
+          <div class="body"><p>Mesin dan alat dirawat sesuai jadwal, bukan menunggu rusak. Pengaman yang aus atau dilepas adalah penyebab klasik kecelakaan.</p></div>
+        </details>
+        <details>
+          <summary>Laporkan near miss</summary>
+          <div class="body"><p>Near miss adalah kejadian nyaris celaka tanpa korban. Penyebabnya sama dengan kecelakaan sungguhan, jadi laporannya peringatan dini yang gratis. Syaratnya budaya yang tidak menghukum pelapor.</p></div>
+        </details>
+        <details>
+          <summary>Prosedur, izin kerja, dan rambu</summary>
+          <div class="body"><p>Pekerjaan berisiko tinggi seperti ruang terbatas, kerja panas, dan kerja di ketinggian butuh SOP serta izin kerja tertulis. Rambu mengingatkan bahaya dan kewajiban tepat di lokasinya.</p></div>
+        </details>
+        <details>
+          <summary>Komitmen manajemen dan budaya K3</summary>
+          <div class="body"><p>Menurut model Bird dan Reason, akar masalah sering ada di tingkat manajemen. Tanpa anggaran, waktu, dan teladan pimpinan, program lain mudah berhenti di tengah jalan.</p></div>
+        </details>
+      </div>
+    </div>
+
+    <h3 style="margin-top:44px; font-size:1.35rem; font-weight:800;">Wadah semuanya: SMK3</h3>
+    <p style="margin-top:8px;">Di Indonesia, pencegahan dikelola secara sistematis lewat Sistem Manajemen K3 (SMK3) menurut PP No. 50 Tahun 2012, dengan lima langkah berurutan:</p>
+    <ol class="steps5">
+      <li>Penetapan kebijakan K3</li>
+      <li>Perencanaan K3</li>
+      <li>Pelaksanaan rencana K3</li>
+      <li>Pemantauan dan evaluasi kinerja K3</li>
+      <li>Peninjauan dan peningkatan kinerja SMK3</li>
+    </ol>
+  </div>
+</section>
+
+<section class="band" id="pengendalian">
+  <div class="wrap">
+    <h2>Pengendalian risiko: susun dari yang paling kuat</h2>
+    <p class="intro">Hierarki pengendalian mengurutkan cara menurunkan risiko dari yang paling efektif ke yang paling lemah. Makin ke atas, makin tidak bergantung pada perilaku manusia. Karena itu APD selalu pertahanan terakhir, bukan yang pertama.</p>
+
+    <div class="hoc" id="hoc">
+      <div class="hoc-card" aria-live="polite">
+        <p class="prog" id="hocProg"></p>
+        <p class="hz" id="hocHazard"></p>
+        <p class="ms" id="hocMeasure"></p>
+      </div>
+      <div class="cap"><span>Paling efektif</span><span>Tindakan ini masuk tingkat yang mana?</span></div>
+      <div class="pyramid" id="pyramid"></div>
+      <div class="result" id="hocResult" role="status" aria-live="polite">Pilih satu tingkat di atas untuk menjawab.</div>
+      <div class="actions"><button class="btn" id="hocNext" type="button" hidden>Soal berikutnya</button></div>
+      <div class="cap" style="margin-top:6px;"><span>Paling bergantung pada perilaku manusia</span><span></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="mitigasi">
+  <div class="wrap">
+    <h2>Mitigasi: kalau bahaya terlanjur lepas</h2>
+    <p class="intro">Pencegahan setinggi apa pun tidak menjamin nol kecelakaan. Mitigasi memastikan dampaknya sekecil mungkin dan pelajarannya tidak hilang. Inilah urutan yang perlu dikuasai semua orang di tempat kerja.</p>
+
+    <ol class="seq">
+      <li>
+        <details open>
+          <summary>Hentikan dan amankan area</summary>
+          <div class="body"><p>Matikan mesin atau sumber energi bila itu aman dilakukan, jauhkan orang lain dari lokasi, dan jangan menambah korban. Penolong yang ikut celaka tidak menolong siapa pun.</p></div>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Beri pertolongan pertama dan panggil bantuan</summary>
+          <div class="body"><p>Petugas P3K memberi pertolongan sesuai kompetensinya, sementara orang lain memanggil bantuan medis. Kotak P3K dan petugas P3K di tempat kerja diatur dalam Permenaker No. 15 Tahun 2008.</p></div>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Aktifkan tanggap darurat</summary>
+          <div class="body"><p>Bunyikan alarm bila perlu, kerahkan tim tanggap darurat, dan evakuasi ke titik kumpul jika kejadian meluas (kebakaran, kebocoran bahan kimia, ledakan). Latihan evakuasi berkala membuat orang bergerak tanpa panik.</p></div>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Rujuk korban ke fasilitas kesehatan</summary>
+          <div class="body"><p>Korban dibawa ke fasilitas kesehatan terdekat yang sesuai. Bawa informasi yang dibutuhkan dokter, misalnya bahan kimia atau mesin yang terlibat.</p></div>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Laporkan kecelakaan</summary>
+          <div class="body"><p>Pengurus atau pengusaha wajib melaporkan kecelakaan kerja ke instansi ketenagakerjaan paling lama 2×24 jam sejak kejadian, sebagaimana diatur Permenaker No. PER.03/MEN/1998. Pelaporan juga membuka jalan klaim Jaminan Kecelakaan Kerja (JKK) di BPJS Ketenagakerjaan.</p></div>
+        </details>
+      </li>
+      <li>
+        <details>
+          <summary>Investigasi dan tindak lanjut</summary>
+          <div class="body"><p>Cari akar penyebab dengan teori di atas (bukan siapa yang salah), perbaiki, lalu bagikan pelajarannya ke seluruh pekerja. Investigasi yang berhenti di &ldquo;pekerja ceroboh&rdquo; biasanya melewatkan penyebab dasar.</p></div>
+        </details>
+      </li>
+    </ol>
+
+    <h3 style="margin-top:44px; font-size:1.35rem; font-weight:800;">Perlengkapan mitigasi yang harus siap</h3>
+    <div class="two" style="margin-top:6px;">
+      <dl class="eq">
+        <dt>APAR</dt>
+        <dd>Alat pemadam api ringan. Pemasangan dan pemeliharaannya diatur Permenaker No. PER.04/MEN/1980.</dd>
+        <dt>Kotak dan petugas P3K</dt>
+        <dd>Isi kotak sesuai jumlah pekerja dan risiko, diperiksa berkala.</dd>
+        <dt>Jalur evakuasi dan titik kumpul</dt>
+        <dd>Bebas hambatan, bertanda jelas, dan dikenali semua pekerja.</dd>
+      </dl>
+      <dl class="eq">
+        <dt>Alarm dan komunikasi darurat</dt>
+        <dd>Peringatan yang terdengar di seluruh area dan nomor darurat yang mudah dijangkau.</dd>
+        <dt>Eye wash dan safety shower</dt>
+        <dd>Untuk paparan bahan kimia ke mata atau kulit, harus bisa dicapai dalam hitungan detik.</dd>
+        <dt>Rencana tanggap darurat dan simulasi</dt>
+        <dd>Rencana tertulis, peran yang jelas, dan latihan berkala.</dd>
+      </dl>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="kuis">
+  <div class="wrap">
+    <h2>Kuis akhir: seberapa kuat rantaimu?</h2>
+    <p class="intro">Delapan soal dari semua bagian di atas. Jawaban dijelaskan setelah kamu memilih.</p>
+    <div class="quiz" id="quiz"></div>
+  </div>
+</section>
+
+</main>
+
+<footer id="referensi">
+  <div class="wrap">
+    <div class="ident">
+      <h2>Tentang karya ini</h2>
+      Nama: Jasmaun Rezky Sulfithdin<br>
+      NIM: V116251081<br>
+      Kelas: <span data-kelas></span><br>
+      Tugas Mid Semester K3, materi 4: pencegahan kecelakaan kerja, mitigasi dan pengendalian risiko, serta teori kecelakaan kerja.<br>
+      Dosen: Fatimah Azzahrah Zainuddin, S.KM., M.KKK
+    </div>
+
+    <h2>Referensi</h2>
+    <h3>Peraturan</h3>
+    <ol>
+      <li>Undang-Undang Nomor 1 Tahun 1970 tentang Keselamatan Kerja.</li>
+      <li>Peraturan Pemerintah Nomor 50 Tahun 2012 tentang Penerapan Sistem Manajemen Keselamatan dan Kesehatan Kerja.</li>
+      <li>Peraturan Menteri Tenaga Kerja Nomor PER.03/MEN/1998 tentang Tata Cara Pelaporan dan Pemeriksaan Kecelakaan.</li>
+      <li>Peraturan Menteri Tenaga Kerja dan Transmigrasi Nomor PER.15/MEN/VIII/2008 tentang Pertolongan Pertama pada Kecelakaan di Tempat Kerja.</li>
+      <li>Peraturan Menteri Tenaga Kerja Nomor PER.04/MEN/1980 tentang Syarat-Syarat Pemasangan dan Pemeliharaan Alat Pemadam Api Ringan.</li>
+    </ol>
+    <h3>Buku dan artikel</h3>
+    <ol start="6">
+      <li>Heinrich, H. W. (1931). <em>Industrial accident prevention: A scientific approach</em>. McGraw-Hill.</li>
+      <li>Bird, F. E., &amp; Germain, G. L. (1985). <em>Practical loss control leadership</em>. Institute Publishing.</li>
+      <li>Reason, J. (1990). <em>Human error</em>. Cambridge University Press.</li>
+      <li>Reason, J. (2000). Human error: Models and management. <em>BMJ, 320</em>(7237), 768&ndash;770.</li>
+      <li>Petersen, D. (1971). <em>Techniques of safety management</em>. McGraw-Hill.</li>
+      <li>Haddon, W. (1973). Energy damage and the ten countermeasure strategies. <em>Human Factors, 15</em>(4), 355&ndash;366.</li>
+      <li>NIOSH. <em>Hierarchy of controls</em>. Centers for Disease Control and Prevention, Amerika Serikat.</li>
+      <li>ISO 45001:2018. <em>Occupational health and safety management systems: Requirements with guidance for use</em>.</li>
+    </ol>
+    <h3>Data</h3>
+    <ol start="14">
+      <li>ANTARA (Mei 2026). Menaker tegaskan BPJS Ketenagakerjaan menjadi penggerak utama K3. <a href="https://megapolitan.antaranews.com/berita/531057/menaker-tegaskan-bpjs-ketenagakerjaan-menjadi-penggerak-utama-k3">megapolitan.antaranews.com</a></li>
+    </ol>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ====== Isi kelas di sini (satu tempat untuk semua) ====== */
+  var KELAS = "[isi kelas]";
+  document.querySelectorAll("[data-kelas]").forEach(function(e){ e.textContent = KELAS; });
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function sleep(ms){ return new Promise(function(r){ setTimeout(r, reduce ? 0 : ms); }); }
+  function $(id){ return document.getElementById(id); }
+
+  /* ====== Domino ====== */
+  var DOM = [
+    "Latar belakang sosial dan lingkungan",
+    "Kesalahan manusia",
+    "Tindakan atau kondisi tidak aman",
+    "Kecelakaan",
+    "Cedera"
+  ];
+
+  function buildRow(el, interactive){
+    var tiles = [];
+    DOM.forEach(function(label, i){
+      var t = document.createElement(interactive ? "button" : "div");
+      t.className = "domino" + (i === 4 ? " last" : "");
+      t.textContent = String(i + 1);
+      if(interactive){
+        t.type = "button";
+        t.setAttribute("aria-pressed", "false");
+        t.setAttribute("aria-label", "Domino " + (i+1) + ": " + label + ". Tekan untuk mencabut atau memasang kembali.");
+      }
+      el.appendChild(t);
+      tiles.push(t);
+    });
+    return tiles;
+  }
+
+  // hero: jatuh sekali saat halaman dibuka
+  (function(){
+    var tiles = buildRow($("heroRow"), false);
+    if(reduce) return;
+    setTimeout(async function(){
+      for(var i = 0; i < tiles.length; i++){
+        tiles[i].classList.add("fall");
+        await sleep(380);
+      }
+    }, 900);
+  })();
+
+  // demo interaktif
+  (function(){
+    var tiles = buildRow($("demoRow"), true);
+    var legend = $("demoLegend");
+    var items = DOM.map(function(label){
+      var li = document.createElement("li");
+      li.textContent = label;
+      legend.appendChild(li);
+      return li;
+    });
+    var out = $("domResult");
+    var running = false;
+
+    tiles.forEach(function(t, i){
+      t.addEventListener("click", function(){
+        if(running) return;
+        clearFalls();
+        var on = !t.classList.contains("removed");
+        t.classList.toggle("removed", on);
+        items[i].classList.toggle("removed", on);
+        t.setAttribute("aria-pressed", on ? "true" : "false");
+        out.textContent = on
+          ? "Domino " + (i+1) + " dicabut. Tekan Dorong untuk melihat hasilnya."
+          : "Domino " + (i+1) + " dipasang kembali.";
+      });
+    });
+
+    function clearFalls(){ tiles.forEach(function(t){ t.classList.remove("fall"); }); }
+
+    var tails = [
+      "Tidak ada yang jatuh. Tapi latar belakang sosial hampir mustahil dicabut oleh sebuah perusahaan.",
+      "Rantai putus di kesalahan manusia. Mengubah perilaku orang itu sulit dijaga terus-menerus.",
+      "Inilah titik yang disarankan Heinrich: tindakan dan kondisi tidak aman paling bisa dikendalikan lewat pelatihan, prosedur, dan perbaikan peralatan.",
+      "Kecelakaan dicegah di detik terakhir, misalnya oleh pengaman mesin. Bahaya masih ada, jadi memutus lebih awal lebih aman.",
+      "Kecelakaan tetap terjadi tetapi tidak ada cedera. Itulah near miss: dampaknya diredam, penyebabnya masih menunggu."
+    ];
+
+    $("pushBtn").addEventListener("click", async function(){
+      if(running) return;
+      running = true;
+      clearFalls();
+      await sleep(250);
+      var blocked = -1;
+      for(var i = 0; i < tiles.length; i++){
+        if(tiles[i].classList.contains("removed")){ blocked = i; break; }
+        tiles[i].classList.add("fall");
+        await sleep(420);
+      }
+      if(blocked === -1){
+        out.textContent = "Semua domino jatuh dan cedera terjadi. Tidak ada satu pun yang dicabut.";
+      } else {
+        out.textContent = "Rantai putus di domino " + (blocked+1) + " (" + DOM[blocked].toLowerCase() + "). " + tails[blocked];
+      }
+      running = false;
+    });
+
+    $("resetDom").addEventListener("click", function(){
+      if(running) return;
+      clearFalls();
+      tiles.forEach(function(t, i){
+        t.classList.remove("removed");
+        t.setAttribute("aria-pressed", "false");
+        items[i].classList.remove("removed");
+      });
+      out.textContent = "Pilih domino yang ingin dicabut, lalu tekan Dorong.";
+    });
+  })();
+
+  /* ====== Tabs ====== */
+  (function(){
+    var tabs = Array.prototype.slice.call(document.querySelectorAll(".tab"));
+    function select(tab, focus){
+      tabs.forEach(function(t){
+        var on = t === tab;
+        t.setAttribute("aria-selected", on ? "true" : "false");
+        t.tabIndex = on ? 0 : -1;
+        $(t.getAttribute("aria-controls")).hidden = !on;
+      });
+      if(focus) tab.focus();
+    }
+    tabs.forEach(function(t, i){
+      t.addEventListener("click", function(){ select(t, false); });
+      t.addEventListener("keydown", function(e){
+        var n = null;
+        if(e.key === "ArrowRight") n = tabs[(i+1) % tabs.length];
+        if(e.key === "ArrowLeft") n = tabs[(i-1+tabs.length) % tabs.length];
+        if(e.key === "Home") n = tabs[0];
+        if(e.key === "End") n = tabs[tabs.length-1];
+        if(n){ e.preventDefault(); select(n, true); }
+      });
+    });
+  })();
+
+  /* ====== Swiss cheese ====== */
+  (function(){
+    var LAYERS = ["Desain", "Prosedur", "Supervisi", "APD"];
+    var box = $("cheese"), hz = $("hazard"), out = $("swissResult");
+    var els = [], strong = [false,false,false,false], busy = false;
+
+    LAYERS.forEach(function(name, i){
+      var d = document.createElement("div");
+      d.className = "layer";
+      d.innerHTML = '<div class="slice"><div class="hole"></div></div>' +
+        '<div class="name">' + name + '</div>' +
+        '<button class="btn" type="button" aria-pressed="false" aria-label="Perkuat lapisan ' + name + '">Perkuat</button>';
+      box.appendChild(d);
+      var b = d.querySelector("button");
+      b.addEventListener("click", function(){
+        if(busy) return;
+        strong[i] = !strong[i];
+        d.classList.toggle("plugged", strong[i]);
+        b.setAttribute("aria-pressed", strong[i] ? "true" : "false");
+        b.textContent = strong[i] ? "Kuat" : "Perkuat";
+        hz.style.left = "0px";
+      });
+      els.push(d);
+    });
+
+    function place(x){ hz.style.left = x + "px"; }
+
+    $("releaseBtn").addEventListener("click", async function(){
+      if(busy) return;
+      busy = true;
+      hz.classList.remove("stop");
+      place(0);
+      await sleep(500);
+      var stoppedAt = -1;
+      for(var i = 0; i < els.length; i++){
+        if(strong[i]){
+          place(els[i].offsetLeft - hz.offsetWidth + 2);
+          await sleep(650);
+          hz.classList.add("stop");
+          stoppedAt = i;
+          break;
+        }
+        place(els[i].offsetLeft + els[i].offsetWidth/2 - hz.offsetWidth/2);
+        await sleep(650);
+      }
+      if(stoppedAt === -1){
+        place(box.scrollWidth - hz.offsetWidth - 6);
+        await sleep(600);
+        out.textContent = "Bahaya menembus semua lapisan dan pekerja terpapar gas. Lubang di keempat lapisan sejajar.";
+      } else {
+        out.textContent = "Bahaya tertahan di lapisan " + LAYERS[stoppedAt] + ". Satu lapisan yang kuat cukup menahan, tetapi tiap lapisan tetap punya kelemahan, jadi jangan bergantung pada satu lapis.";
+      }
+      busy = false;
+    });
+
+    $("resetSwiss").addEventListener("click", function(){
+      if(busy) return;
+      strong = [false,false,false,false];
+      els.forEach(function(d){
+        d.classList.remove("plugged");
+        var b = d.querySelector("button");
+        b.setAttribute("aria-pressed","false");
+        b.textContent = "Perkuat";
+      });
+      hz.classList.remove("stop");
+      place(0);
+      out.textContent = "Belum ada lapisan yang diperkuat. Coba lepaskan bahaya dulu, lalu bandingkan.";
+    });
+  })();
+
+  /* ====== Hierarki pengendalian (game) ====== */
+  (function(){
+    var LV = [
+      {k:"Eliminasi", d:"Hapus bahayanya"},
+      {k:"Substitusi", d:"Ganti dengan yang lebih aman"},
+      {k:"Rekayasa teknik", d:"Pisahkan bahaya dari pekerja"},
+      {k:"Administratif", d:"Atur cara dan waktu kerja"},
+      {k:"APD", d:"Lindungi pekerja, bahaya tetap ada"}
+    ];
+    var ALL = [
+      {h:"Kerja di ketinggian", m:"Merakit rangka atap di darat, lalu mengangkatnya utuh dengan crane.", a:0,
+       e:"Perakitan tidak lagi dilakukan di atas, jadi bahaya jatuh nyaris hilang."},
+      {h:"Pengecatan", m:"Memakai panel yang sudah dicat dari pabrik sehingga tidak ada lagi pengecatan semprot di lokasi.", a:0,
+       e:"Proses berbahaya dihapus sama sekali."},
+      {h:"Pelarut kimia", m:"Mengganti pelarut beracun dengan pelarut berbasis air.", a:1,
+       e:"Bahayanya tidak dihapus, tetapi diganti dengan yang jauh lebih rendah risikonya."},
+      {h:"Debu", m:"Mengganti bubuk halus yang berdebu dengan bentuk pelet atau pasta.", a:1,
+       e:"Zat yang dipakai tetap sama fungsinya, tetapi bentuknya jauh kurang berbahaya."},
+      {h:"Kebisingan", m:"Memasang kotak peredam (enclosure) di sekeliling mesin.", a:2,
+       e:"Bahaya dipisahkan dari pekerja secara fisik tanpa mengandalkan perilaku pekerja."},
+      {h:"Mesin press", m:"Memasang guard dan interlock pada mesin press.", a:2,
+       e:"Pelindung fisik mencegah tangan masuk zona bahaya."},
+      {h:"Kebisingan", m:"Merotasi pekerja agar lama paparan tiap orang berkurang.", a:3,
+       e:"Mengatur jadwal kerja adalah kendali administratif. Bisingnya sendiri tidak berkurang."},
+      {h:"Bahan kimia", m:"Melatih pekerja membaca label dan lembar data keselamatan (SDS).", a:3,
+       e:"Pelatihan dan informasi bahaya termasuk kendali administratif."},
+      {h:"Kebisingan", m:"Menyediakan earplug bagi pekerja di area bising.", a:4,
+       e:"APD melindungi pekerja, tetapi bahayanya tetap ada dan bergantung pada pemakaian yang benar."},
+      {h:"Kerja di ketinggian", m:"Mewajibkan full body harness saat memasang atap.", a:4,
+       e:"Harness tidak mencegah terjatuh, hanya mengurangi akibatnya. Itu sebabnya ia di tingkat terbawah."}
+    ];
+
+    var order, idx, score, answered;
+    var pyr = $("pyramid"), res = $("hocResult"), nextBtn = $("hocNext");
+    var btns = LV.map(function(l, i){
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "lv";
+      b.innerHTML = "<b>" + l.k + "</b><span>" + l.d + "</span>";
+      b.addEventListener("click", function(){ answer(i); });
+      pyr.appendChild(b);
+      return b;
+    });
+
+    function shuffle(a){
+      a = a.slice();
+      for(var i = a.length - 1; i > 0; i--){
+        var j = Math.floor(Math.random() * (i+1));
+        var t = a[i]; a[i] = a[j]; a[j] = t;
+      }
+      return a;
+    }
+
+    function start(){
+      order = shuffle(ALL); idx = 0; score = 0;
+      show();
+    }
+
+    function show(){
+      answered = false;
+      var q = order[idx];
+      $("hocProg").textContent = "Soal " + (idx+1) + " dari " + order.length + ", skor " + score;
+      $("hocHazard").textContent = "Bahaya: " + q.h;
+      $("hocMeasure").textContent = q.m;
+      btns.forEach(function(b){
+        b.classList.remove("right","wrong");
+        b.removeAttribute("aria-disabled");
+      });
+      res.textContent = "Pilih satu tingkat di atas untuk menjawab.";
+      nextBtn.hidden = true;
+      pyr.style.display = "";
+    }
+
+    function answer(i){
+      if(answered) return;
+      answered = true;
+      var q = order[idx];
+      btns.forEach(function(b){ b.setAttribute("aria-disabled","true"); });
+      btns[q.a].classList.add("right");
+      if(i === q.a){
+        score++;
+        res.textContent = "Benar, ini " + LV[q.a].k + ". " + q.e;
+      } else {
+        btns[i].classList.add("wrong");
+        res.textContent = "Belum tepat. Jawaban yang benar: " + LV[q.a].k + ". " + q.e;
+      }
+      $("hocProg").textContent = "Soal " + (idx+1) + " dari " + order.length + ", skor " + score;
+      nextBtn.textContent = idx === order.length - 1 ? "Lihat hasil" : "Soal berikutnya";
+      nextBtn.hidden = false;
+      nextBtn.focus();
+    }
+
+    nextBtn.addEventListener("click", function(){
+      if(nextBtn.textContent === "Main lagi"){ start(); return; }
+      idx++;
+      if(idx >= order.length){ finish(); } else { show(); }
+    });
+
+    function finish(){
+      var msg;
+      if(score >= 9) msg = "Kamu sudah hafal logikanya: makin dekat ke sumber bahaya, makin kuat kendalinya.";
+      else if(score >= 6) msg = "Sudah bagus. Ulangi untuk membedakan rekayasa teknik dari administratif, dua tingkat yang paling sering tertukar.";
+      else msg = "Ingat satu aturan: tanya dulu apakah bahayanya bisa dihapus atau diganti sebelum menyuruh pekerja berhati-hati.";
+      $("hocProg").textContent = "Selesai";
+      $("hocHazard").textContent = "Skormu " + score + " dari " + order.length;
+      $("hocMeasure").textContent = msg;
+      pyr.style.display = "none";
+      res.textContent = "Pyramid ini menjelaskan mengapa APD adalah pertahanan terakhir.";
+      nextBtn.textContent = "Main lagi";
+      nextBtn.hidden = false;
+    }
+
+    start();
+  })();
+
+  /* ====== Kuis ====== */
+  (function(){
+    var Q = [
+      {q:"Menurut Heinrich, domino mana yang paling efektif dicabut karena paling bisa dikendalikan?",
+       o:["Latar belakang sosial","Tindakan atau kondisi tidak aman","Cedera","Kecelakaan"], a:1,
+       e:"Tindakan dan kondisi tidak aman dapat diperbaiki lewat pelatihan, prosedur, dan perbaikan peralatan."},
+      {q:"Menurut model Swiss Cheese, kecelakaan terjadi ketika...",
+       o:["Satu orang melakukan kesalahan besar","Semua APD rusak sekaligus","Lubang pada beberapa lapisan pertahanan kebetulan sejajar","Cuaca sedang buruk"], a:2,
+       e:"Tiap lapisan punya kelemahan. Bahaya menembus bila kelemahan di semua lapisan terbuka bersamaan."},
+      {q:"Dalam model Loss Causation Bird, apa yang berada di awal rantai?",
+       o:["Kurang kontrol manajemen","Tindakan substandar pekerja","Kontak dengan energi","Cedera korban"], a:0,
+       e:"Bird menempatkan kegagalan kontrol manajemen sebagai akar yang memicu penyebab dasar, penyebab langsung, dan seterusnya."},
+      {q:"Mana yang paling efektif dalam hierarki pengendalian risiko?",
+       o:["APD","Pelatihan","Rambu peringatan","Eliminasi"], a:3,
+       e:"Eliminasi menghapus bahayanya, sehingga tidak bergantung pada perilaku siapa pun."},
+      {q:"Mana yang termasuk mitigasi?",
+       o:["Mengganti bahan kimia berbahaya dengan yang lebih aman","Memasang pagar pengaman di tepi atap","Menyiapkan petugas P3K, jalur evakuasi, dan latihan tanggap darurat","Menyusun SOP untuk mesin baru"], a:2,
+       e:"Mitigasi membatasi dampak ketika kejadian terjadi atau mungkin terjadi, bukan menghapus penyebabnya."},
+      {q:"Mengapa kejadian near miss sebaiknya dilaporkan?",
+       o:["Agar pekerja yang ceroboh bisa dihukum","Penyebabnya sama dengan kecelakaan sungguhan, sehingga jadi peringatan dini","Karena near miss selalu bisa diklaim ke BPJS","Supaya catatan perusahaan terlihat lengkap"], a:1,
+       e:"Near miss adalah pelajaran gratis. Laporannya hanya berguna jika pelapor tidak dihukum."},
+      {q:"Kecelakaan kerja wajib dilaporkan ke instansi ketenagakerjaan dalam waktu...",
+       o:["Setelah korban sembuh","7 hari kerja","1 bulan","Paling lama 2×24 jam"], a:3,
+       e:"Batas ini diatur dalam Permenaker No. PER.03/MEN/1998."},
+      {q:"Menurut teori transfer energi, cedera terjadi karena...",
+       o:["Energi berpindah ke tubuh melebihi batas toleransinya","Pekerja tidak mau memakai APD","Hanya karena kesalahan satu orang","Selalu karena bahan kimia"], a:0,
+       e:"Maka pencegahan berarti mengatur, menghalangi, atau mengurangi energi sebelum sampai ke tubuh."}
+    ];
+    var box = $("quiz"), i = 0, score = 0, missed = [];
+
+    function render(){
+      var q = Q[i];
+      var h = '<div class="qcard"><p class="prog">Soal ' + (i+1) + ' dari ' + Q.length + '</p><p class="qt">' + q.q + '</p><div id="opts"></div><div id="qfb" role="status" aria-live="polite"></div><div class="actions" id="qact"></div></div>';
+      box.innerHTML = h;
+      var wrap = $("opts");
+      q.o.forEach(function(t, k){
+        var b = document.createElement("button");
+        b.type = "button"; b.className = "opt"; b.textContent = t;
+        b.addEventListener("click", function(){ pick(k, wrap); });
+        wrap.appendChild(b);
+      });
+    }
+
+    function pick(k, wrap){
+      if(wrap.dataset.done) return;
+      wrap.dataset.done = "1";
+      var q = Q[i];
+      var bs = wrap.querySelectorAll(".opt");
+      bs.forEach(function(b){ b.setAttribute("aria-disabled","true"); });
+      bs[q.a].classList.add("right");
+      var fb = $("qfb");
+      if(k === q.a){ score++; fb.className = "qfb"; fb.textContent = "Benar. " + q.e; }
+      else { bs[k].classList.add("wrong"); missed.push(i); fb.className = "qfb"; fb.textContent = "Belum tepat. Jawaban yang benar sudah ditandai hijau. " + q.e; }
+      var n = document.createElement("button");
+      n.type = "button"; n.className = "btn";
+      n.textContent = i === Q.length - 1 ? "Lihat skor" : "Soal berikutnya";
+      n.addEventListener("click", function(){ i++; if(i >= Q.length) end(); else render(); });
+      $("qact").appendChild(n);
+      n.focus();
+    }
+
+    function end(){
+      var msg = score === Q.length ? "Sempurna. Rantaimu kuat."
+        : score >= 6 ? "Bagus. Beberapa mata rantai masih bisa dikuatkan."
+        : "Baca ulang bagian teori dan pengendalian, lalu coba lagi.";
+      var h = '<div class="qcard"><p class="prog">Hasil akhir</p><div class="score">' + score + ' dari ' + Q.length + '</div><p>' + msg + '</p>';
+      if(missed.length){
+        h += '<p style="margin-bottom:6px;"><strong>Yang perlu diulang:</strong></p><ul class="mini">';
+        missed.forEach(function(m){ h += '<li>' + Q[m].q + ' <em>' + Q[m].o[Q[m].a] + '.</em></li>'; });
+        h += '</ul>';
+      }
+      h += '<div class="actions"><button class="btn" id="again" type="button">Ulangi kuis</button></div></div>';
+      box.innerHTML = h;
+      $("again").addEventListener("click", function(){ i = 0; score = 0; missed = []; render(); });
+    }
+
+    render();
+  })();
+
+})();
+</script>
+<noscript><p style="padding:20px;">Halaman ini membutuhkan JavaScript agar simulasi dan kuis dapat berjalan.</p></noscript>
+</body>
+</html>
